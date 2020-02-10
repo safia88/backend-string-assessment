@@ -1,4 +1,6 @@
-#!/usr/bin/env python
+import math
+
+# !/usr/bin/env python
 # Copyright 2010 Google Inc.
 # Licensed under the Apache License, Version 2.0
 # http://www.apache.org/licenses/LICENSE-2.0
@@ -18,8 +20,15 @@
 
 
 def verbing(s):
-    """Your code goes here.  Edit this docstring."""
-    return
+    # Your code goes here.  Edit this docstring.
+    resulting_string = s
+    if len(s) > 2:
+        if s[-3:] == 'ing':
+            resulting_string = s + 'ly'
+        else:
+            resulting_string = s + 'ing'
+
+    return resulting_string
 
 
 # E. not_bad
@@ -31,8 +40,14 @@ def verbing(s):
 # So 'This dinner is not that bad!' yields:
 # This dinner is good!
 def not_bad(s):
-    """Your code goes here.  Edit this docstring."""
-    return
+    # Your code goes here.  Edit this docstring.
+    result_string = s
+    nindex = s.find('not')
+    bindex = s.find('bad')
+    if bindex > nindex:
+        rep_string = s[nindex:bindex + 3]
+        result_string = result_string.replace(rep_string, 'good')
+    return result_string
 
 
 # F. front_back
@@ -42,15 +57,35 @@ def not_bad(s):
 # e.g. 'abcde', the front half is 'abc', the back half 'de'.
 # Given 2 strings, a and b, return a string of the form
 #  a-front + b-front + a-back + b-back
+
+
 def front_back(a, b):
-    """Your code goes here.  Edit this docstring."""
-    return
+    # Your code goes here.  Edit this docstring.
+    a_front = ''
+    b_front = ''
+    a_back = ''
+    b_back = ''
+    if len(a) % 2 == 0:
+        a_front = a[:int(len(a) / 2)]
+        a_back = a[int(len(a) / 2):]
+    else:
+        a_front = a[:math.ceil(len(a) / 2)]
+        a_back = a[math.floor(len(a) / 2) + 1:]
+
+    if len(b) % 2 == 0:
+        b_front = b[:int(len(b) / 2)]
+        b_back = b[int(len(b) / 2):]
+    else:
+        b_front = b[:math.ceil(len(b) / 2)]
+        b_back = b[math.floor(len(b) / 2) + 1:]
+
+    return a_front + b_front + a_back + b_back
 
 
 # Provided simple test() function used in main() to print
 # what each function returns vs. what it's supposed to return.
 def test(got, expected):
-    """Your code goes here.  Edit this docstring."""
+    # Your code goes here.  Edit this docstring.
     if got == expected:
         prefix = ' OK '
     else:
@@ -61,7 +96,7 @@ def test(got, expected):
 # main() calls the above functions with interesting inputs,
 # using the above test() to check if the result is correct or not.
 def main():
-    """Your code goes here.  Edit this docstring."""
+    # Your code goes here.  Edit this docstring.
     print('verbing')
     test(verbing('hail'), 'hailing')
     test(verbing('swiming'), 'swimingly')
